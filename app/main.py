@@ -7,6 +7,7 @@ from sqlalchemy.orm import sessionmaker
 import os
 from dotenv import load_dotenv
 import sys
+# new commit final
 
 # Load environment variables
 load_dotenv()

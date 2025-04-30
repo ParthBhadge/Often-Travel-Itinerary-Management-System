@@ -99,3 +99,28 @@ def get_filtered_itineraries(
         return results
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Failed to fetch itineraries: {str(e)}")
+
+@router.post("/{itinerary_id}/days")
+def add_days_to_itinerary(itinerary_id: int, days: List[DayCreate], db: Session = Depends(get_db)):
+    try:
+        # Check if the itinerary exists
+        itinerary = db.query(Itinerary).filter(Itinerary.id == itinerary_id).first()
+        if not itinerary:
+            raise HTTPException(status_code=404, detail="Itinerary not found")
+
+        # Add days to the itinerary
+        for day in days:
+            new_day = Day(
+                day_number=day.day_number,
+                hotel=day.hotel,
+                activities=day.activities,
+                transfers=day.transfers,
+                itinerary_id=itinerary_id,
+            )
+            db.add(new_day)
+
+        db.commit()
+        return {"message": "Days added successfully"}
+    except Exception as e:
+        db.rollback()
+        raise HTTPException(status_code=500, detail=f"Failed to add days: {str(e)}")
