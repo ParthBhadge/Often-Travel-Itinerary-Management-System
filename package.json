@@ -1,4 +1,8 @@
 {
+<<<<<<< HEAD
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.10.2"
+=======
   "name": "backend2",
   "version": "1.0.0",
   "description": "",
@@ -20,5 +24,6 @@
   },
   "devDependencies": {
     "nodemon": "^3.1.10"
+>>>>>>> 58b03f1b2e6435c9c96c4f24f6df05729476de2b
   }
 }
